@@ -32,12 +32,12 @@ def get_vertex_index(vertex, all_vertices):
 def create_associated_vertex_graph(all_vertices, shape):
 	# Given an array of vertices (all_vertices), list all the
 	# points that are connected to create the n-dimensional shape (shape).
+	associated_vertices = []
+
 
 	if (shape == 'cube'):
 		# calculates the norm between every combination of vertices, and associates any pair
-		# that have norm 1.
-
-		associated_vertices = []
+		# that have distance 1.
 
 		for i, j in it.combinations(all_vertices, 2):
 			if (np.linalg.norm(i - j) == 1.0):
@@ -46,9 +46,18 @@ def create_associated_vertex_graph(all_vertices, shape):
 				# print(idx_1, idx_2)
 				associated_vertices.append([idx_1, idx_2])
 
-		return associated_vertices
+	if (shape == 'orthoplex'):
+		# Calculates the norm between every combination of vertices, and associates any pair
+		# that have distance sqrt(2)
 
-	return
+		for i, j in it.combinations(all_vertices, 2):
+			if (np.linalg.norm(i - j) == math.sqrt(2)):
+				idx_1 = get_vertex_index(i, all_vertices)
+				idx_2 = get_vertex_index(j, all_vertices)
+				# print('got a pair:', idx_1, idx_2)
+				associated_vertices.append([idx_1, idx_2])
+
+	return associated_vertices	
 
 
 def get_camera_bases(point, camera_location, camera_orientation_array):
