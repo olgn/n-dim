@@ -201,3 +201,17 @@ def cross_product(vectors):
 
 	# print('the calculated cross_product is:', cross_product)
 	return cross_product
+
+
+
+# calculates the intersection of a line defined by two points in n-dimensional space 
+# (p1 and p0) with a 'plane' in n-1 dimensional space
+def intersect(p0, p1, p_co, p_no, epsilon=1e-6):
+	u = p1 - p0
+	dot = np.dot(p_no, u)
+	if abs(dot) > epsilon:
+		w = p0 - p_co
+		fac = -(np.dot(p_no, w)) / dot
+		if (fac >= 0 and fac <= 1):
+			return p0 + u * fac
+	return None
