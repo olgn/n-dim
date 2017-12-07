@@ -199,7 +199,7 @@ def intersect_4d_cube(p_co, p_no, R3, color):
 			for vertex in intersections:
 				new_point = np.dot((vertex - p4['location']), p4['bases'])
 				projection = utils.get_screen_coordinates(new_point, p4['extent'], p4['center'], p4['theta'])
-				axes[idx].scatter([projection[0]], [projection[1]], [projection[2]], 'red', c=color, s=15)
+				axes[idx].scatter([projection[0]], [projection[1]], [projection[2]], s=15)
 				vertices_3.append(projection)
 
 			x = [vertex[0] for vertex in vertices_3]
@@ -224,4 +224,4 @@ R3 = np.array([	[cos(theta), -sin(theta), 0, 0],
 
 p_no = np.array([-.7,1,0, 1]);
 p_co = np.array([0,0,.01,0]);
-intersect_4d_cube(p_co, p_no, R3, 'blue')
+intersect_4d_cube(p_co, p_no, R3, (0,0,1,.5))
